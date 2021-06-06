@@ -7,6 +7,9 @@ dengue_ce_subset <- dengue_ce %>%
   group_by(nome_municipio, id_municip) %>%
   summarise(case_incidence = sum(case_incidence)) 
 
+palette <- tibble(z = c(0, 0.33, 0.33, 0.66, 0.66, 1),
+                  color = c("#FF6F0A", "FF6F0A", "FFC908", "FFC908", "038927", "038927"))
+
 plot_ly() %>%
   add_trace(
     type = "choroplethmapbox",
@@ -15,13 +18,17 @@ plot_ly() %>%
     z = dengue_ce_subset$case_incidence,
     zmin = 0,
     zmax = 300,
-    featureidkey = "properties.name"
+    featureidkey = "properties.name",
+    colorscale = palette,
+    marker = list(line = list(color = "white",
+                              width = 0.55))
   ) %>%
   layout(
+    title = "Incidência de casos de Dengue em 2019 por 100 mil habitantes",
     mapbox = list(
       style = "carto-positron",
-      zoom = 5.25,
-      center = list(lon = -38.8941727, lat = -5.576749)
+      zoom = 6,
+      center = list(lon = -39.3767561, lat = -5.1746363)
     )
   ) %>%
   config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
