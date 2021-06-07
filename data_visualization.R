@@ -8,7 +8,7 @@ dengue_ce_subset <- dengue_ce %>%
   summarise(case_incidence = sum(case_incidence)) 
 
 palette <- tibble(z = c(0, 0.33, 0.33, 0.66, 0.66, 1),
-                  color = c("#FF6F0A", "FF6F0A", "FFC908", "FFC908", "038927", "038927"))
+                  color = c("038927", "038927", "FFC908", "FFC908","#FF6F0A", "FF6F0A"))
 
 plot_ly() %>%
   add_trace(
